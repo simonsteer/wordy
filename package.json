@@ -1,0 +1,31 @@
+{
+  "name": "wordy",
+  "version": "0.1.0",
+  "private": true,
+  "devDependencies": {
+    "babel-preset-react-native-stage-0": "^1.0.1",
+    "jest": "^22.4.3",
+    "jest-react-native": "^18.0.0",
+    "react-test-renderer": "16.3.0-alpha.1"
+  },
+  "scripts": {
+    "start": "react-native start",
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "test": "jest"
+  },
+  "jest": {
+    "preset": "react-native"
+  },
+  "dependencies": {
+    "check-word": "^1.1.0",
+    "lodash": "^4.17.10",
+    "react": "16.3.0",
+    "react-native": "~0.54.1",
+    "react-redux": "^5.0.7",
+    "redux": "^4.0.0",
+    "timer.js": "^1.0.4",
+    "word-list": "^2.0.0",
+    "words-en": "^2.0.0"
+  }
+}

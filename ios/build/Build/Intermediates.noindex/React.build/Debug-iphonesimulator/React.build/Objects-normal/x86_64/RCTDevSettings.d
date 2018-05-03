@@ -1,0 +1,23 @@
+dependencies: \
+  /Users/simon/code/wordy/node_modules/react-native/React/Modules/RCTDevSettings.mm \
+  /Users/simon/code/wordy/node_modules/react-native/React/Modules/RCTDevSettings.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTBridge.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTBridgeDelegate.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTJavaScriptLoader.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTDefines.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTBridgeModule.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTFrameUpdate.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTInvalidating.h \
+  /Users/simon/code/wordy/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JavaScriptCore.h \
+  /Users/simon/code/wordy/ios/build/Build/Products/Debug-iphonesimulator/include/jschelpers/JSCWrapper.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTBridge+Private.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Modules/RCTJSCSamplingProfiler.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTLog.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTAssert.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Base/RCTUtils.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/DevSupport/RCTPackagerClient.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Profiler/RCTProfile.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/DevSupport/RCTPackagerConnection.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/simon/code/wordy/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h

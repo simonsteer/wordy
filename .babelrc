@@ -1,0 +1,15 @@
+{
+  "presets": [
+    "babel-preset-react-native-stage-0/decorator-support"
+  ],
+  "ignore": [
+    "./src/utils.dictionary.json"
+  ],
+  "env": {
+    "development": {
+      "plugins": [
+        "transform-react-jsx-source"
+      ]
+    }
+  },
+}
