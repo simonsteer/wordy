@@ -4,12 +4,19 @@ import { dictionary1 } from '../utils/dictionary1'
 import { dictionary2 } from '../utils/dictionary2'
 import { dictionary3 } from '../utils/dictionary3'
 
+import _ from 'lodash'
+
 const game = {
-    letters: [],
+    letters: 'HAPPYHAPPYHAPPYHAPPYHAPPY'.split(''),
     currentWord: [],
     currentWordIsValid: false,
     scoringInProgress: false,
     score: 0,
+    scoredWords: [],
+    wps: 0,
+    gameOver: true,
+    activeBonus: null,
+    bonusAlert: null,
 }
 
 const dictionary = [
@@ -69,15 +76,25 @@ export default (state = game, action) => {
           removedWord.length > 2,
       }
     case 'SCORE_WORD_START':
-      return {
-        ...state,
-        scoringInProgress: true,
-      }
-    case 'SCORE_WORD_FINISH':
-      const newScore = currentWord.reduce((score, letterData) => {
-        return score + letterConfig[letterData.letter].points
+      const wordString = currentWord
+        .map(letterData => letterData.letter)
+        .join('')
+
+      const scoredWords = state.scoredWords.concat(wordString)
+
+      const newScore = currentWord.reduce((total, letterData) => {
+        return total + applyWordBonuses({ ...state, scoredWords }, letterConfig[letterData.letter].points)
       }, score)
 
+      return {
+        ...state,
+        score: newScore,
+        scoredWords,
+        currentWordIsValid: false,
+        scoringInProgress: true,
+        
+      }
+    case 'SCORE_WORD_FINISH':
       const newLetters = letters.map((letter, index) => {
         if (!!currentWord.find(letterData =>
           letterData.index === index && letterData.letter === letter
@@ -87,17 +104,46 @@ export default (state = game, action) => {
 
         return letter
       })
-      
 
       return {
         ...state,
         letters: newLetters,
-        currentWord: [],
-        currentWordIsValid: false,
-        score: newScore,
+        currentWord: [],        
         scoringInProgress: false,
       }
     default:
       return state
   }
 }
+
+const applyWordBonuses = (state, point) => {
+  let bonusAppliedScore = point
+
+  scoreWordBonuses.forEach(bonus => {
+    if (bonus.meets_conditions(state)) {
+      bonusAppliedScore = bonusAppliedScore * bonus.multiplier
+    }
+  })
+
+  return bonusAppliedScore
+}
+
+const scoreWordBonuses = [
+  {
+    name: 'Spell the same word twice in a row',
+    bonusEffect: 'TRIPLE SCORE',
+    meets_conditions: nextState =>
+      nextState.scoredWords.length >= 2 &&
+      _.last(nextState.scoredWords) === _.last(_.initial(nextState.scoredWords)),
+    multiplier: 3,
+  },
+  {
+    name: 'Spell two five letter words in a row',
+    bonusEffect: 'QUINTUPLE SCORE',
+    meets_conditions: nextState =>
+      nextState.scoredWords.length >= 2 &&
+      _.last(nextState.scoredWords).length === 5 && _.last(_.initial(nextState.scoredWords)).length === 5,
+    multiplier: 5,
+  },
+]
+

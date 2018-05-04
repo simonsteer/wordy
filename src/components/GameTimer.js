@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, Animated, Easing } from 'react-native'
 import letters from '../config/letters'
 import customStyles from '../utils/customStyles'
 
@@ -8,8 +8,10 @@ import Timer from 'timer.js'
 export default class GameTimer extends React.Component {
   constructor() {
     super()
+    this.colorValue = new Animated.Value(0)
     this.state = {
-      time: 60,
+      inDanger: false,
+      time: 20,
       timer: new Timer({
         tick: 1,
         ontick: this.decrement,
@@ -17,12 +19,17 @@ export default class GameTimer extends React.Component {
     }
   }
 
-  componentWillReceiveProps(nextProps) {
+  componentWillReceiveProps = nextProps => {
     if (nextProps.scoringInProgress) {
       const secondsLeft = Math.floor(this.state.timer.getDuration() / 1000)
       const updatedTime = secondsLeft + this.props.currentWord.length < 61
         ? secondsLeft + this.props.currentWord.length
         : 60
+      
+      if (updatedTime > 10 && this.state.inDanger) {
+        this.normalize()
+        this.setState({ inDanger: false })
+      }
 
       this.state.timer.stop()
       this.setState({
@@ -33,26 +40,69 @@ export default class GameTimer extends React.Component {
   }
 
   componentDidMount() {
-    this.state.timer.start(61)
+    this.state.timer.start(20)
   }
   
   render() {
+
+    const backgroundColor = this.colorValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [
+        'rgb(255, 255, 255)',
+        'rgb(255, 150, 150)',
+      ],
+    })
+
+    const borderColor = this.colorValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: [
+        'rgb(204, 204, 204)',
+        'rgb(255, 99, 99)',
+      ],
+    })
+
     return (
-    <View style={[styles.container, customStyles.flatShadow]}>
-      <Text style={[
-        styles.timer,
-        this.state.time < 11 && { color: 'rgb(255, 99, 99)' },
-      ]}>
-        {getTimerString(this.state.time)}
-      </Text>
-    </View>
+      <Animated.View style={[styles.container, customStyles.flatShadow, { borderColor, backgroundColor }]}>
+        <Text style={styles.timer}>
+          {getTimerString(this.state.time)}
+        </Text>
+      </Animated.View>
     )
   }
 
-  decrement = () =>
+  decrement = () => {
+    const time = this.state.time - 1
     this.setState({
-      time: this.state.time - 1,
+      time,
     })
+
+    if (time < 11 && !this.state.inDanger) {
+      this.red()
+      this.setState({ inDanger: true })
+    }
+  }
+  
+  red() {
+    Animated.timing(
+      this.colorValue,
+      {
+        toValue: 1,
+        duration: 500,
+        easing: Easing.linear,
+      },
+    ).start()
+  }
+
+  normalize() {
+    Animated.timing(
+      this.colorValue,
+      {
+        toValue: 0,
+        duration: 500,
+        easing: Easing.linear,
+      },
+    ).start()
+  }
 }  
 
 const styles = StyleSheet.create({

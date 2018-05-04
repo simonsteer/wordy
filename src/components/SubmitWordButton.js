@@ -10,7 +10,7 @@ export default class SubmitWordButton extends React.Component {
   }
 
   render() {
-    const { currentWordIsValid, currentWord, onPress } = this.props
+    const { currentWordIsValid, currentWord } = this.props
     const backgroundColor = this.colorValue.interpolate({
       inputRange: [0, 1, 2],
       outputRange: [
@@ -32,7 +32,7 @@ export default class SubmitWordButton extends React.Component {
     return (
       <TouchableWithoutFeedback
         onPress={() => {
-          onPress()
+          this.props.onPress()
           this.flash(currentWordIsValid)
         }}
       >
@@ -54,15 +54,15 @@ export default class SubmitWordButton extends React.Component {
   }
 
   flash(currentWordIsValid) {
-    const value = 
+    console.log('flashing')
     Animated.timing(
       this.colorValue,
       {
         toValue: currentWordIsValid ? 0 : 2,
         duration: 100,
-        easing: Easing.linear,
+        easing: Easing.ease,
       },
-    ).start(() => this.normalize())
+    ).start(this.normalize)
   }
 
   normalize() {

@@ -1,10 +1,8 @@
 import React from 'react'
 import Board from './Board'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import CurrentWord from '../components/CurrentWord'
-import SubmitWordButton from '../components/SubmitWordButton'
-import Score from '../components/Score'
-import GameTimer from '../components/GameTimer'
+import CurrentWordAndSubmit from './CurrentWordAndSubmit'
+import ScoreAndTime from './ScoreAndTime'
 
 import { connect } from 'react-redux'
 
@@ -14,9 +12,9 @@ import { connect } from 'react-redux'
   }
 })
 export default class Wordy extends React.Component {
-  componentDidMount() {
-    this.props.dispatch({ type: 'START_NEW_GAME' })
-  }
+  // componentDidMount() {
+  //   this.props.dispatch({ type: 'START_NEW_GAME' })
+  // }
 
   render() {
     const {
@@ -26,14 +24,7 @@ export default class Wordy extends React.Component {
 
     return (
       <View style={styles.container}>
-        <View style={styles.gui}>
-          <Score score={game.score} />
-          <GameTimer
-            scoringInProgress={game.scoringInProgress}
-            currentWord={game.currentWord}
-          />
-        </View>
-
+        <ScoreAndTime game={game} />
         <Board
           letters={game.letters}
           dispatch={dispatch}
@@ -42,19 +33,7 @@ export default class Wordy extends React.Component {
           score={game.score}
           scoringInProgress={game.scoringInProgress}
         />
-        
-        <View style={styles.gui}>
-          <CurrentWord currentWord={game.currentWord} />
-          <SubmitWordButton
-            currentWord={game.currentWord}
-            currentWordIsValid={game.currentWordIsValid}
-            onPress={() => {
-              if (game.currentWordIsValid) {
-                dispatch({ type: 'SCORE_WORD_START' })
-              }
-            }}
-          />
-        </View>
+        <CurrentWordAndSubmit game={game} dispatch={dispatch}/>
       </View>
     )
   }
