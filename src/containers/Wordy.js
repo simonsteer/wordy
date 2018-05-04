@@ -1,8 +1,9 @@
 import React from 'react'
 import Board from './Board'
 import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import CurrentWordAndSubmit from './CurrentWordAndSubmit'
+import BonusAlerts from './BonusAlerts'
 import ScoreAndTime from './ScoreAndTime'
+import CurrentWordAndSubmit from './CurrentWordAndSubmit'
 
 import { connect } from 'react-redux'
 
@@ -22,9 +23,12 @@ export default class Wordy extends React.Component {
       game,
     } = this.props
 
+    console.log(game.bonusAlerts)
+
     return (
       <View style={styles.container}>
-        <ScoreAndTime game={game} />
+        <BonusAlerts bonusAlerts={game.bonusAlerts} dispatch={dispatch}/>
+        <ScoreAndTime game={game}/>
         <Board
           letters={game.letters}
           dispatch={dispatch}
@@ -34,6 +38,12 @@ export default class Wordy extends React.Component {
           scoringInProgress={game.scoringInProgress}
         />
         <CurrentWordAndSubmit game={game} dispatch={dispatch}/>
+        <View style={{ flex: 1, backgroundColor: 'red' }}>
+          <Text>Knock Knock</Text> 
+          <Text>Who's there</Text> 
+          <Text>Updog</Text>
+          <Text>What's updog</Text>
+        </View>
       </View>
     )
   }

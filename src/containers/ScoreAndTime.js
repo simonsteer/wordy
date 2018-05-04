@@ -5,7 +5,7 @@ import GameTimer from '../components/GameTimer'
 
 const ScoreAndTime = ({ game }) => 
   <View style={styles.gui}>
-    <Score score={game.score} />
+    <Score game={game} />
     <GameTimer
       scoringInProgress={game.scoringInProgress}
       currentWord={game.currentWord}

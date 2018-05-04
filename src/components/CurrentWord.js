@@ -22,11 +22,11 @@ const CurrentWord = ({ currentWord }) => {
 
   return (
     <View style={styles.container}>
-    <View style={styles.box}>
-      <Text style={[styles.currentWord, !currentWordAndScore && { color: '#bababa' } ]}>
-        {currentWordAndScore ? currentWordAndScore : 'START SPELLING!'}
-      </Text>
-    </View>
+      <View style={styles.box}>
+        <Text style={[styles.currentWord, !currentWordAndScore && { color: '#bababa' } ]}>
+          {currentWordAndScore ? currentWordAndScore : 'START SPELLING!'}
+        </Text>
+      </View>
     </View>
   )
 }
@@ -40,17 +40,16 @@ const styles = StyleSheet.create({
   container: {
     marginLeft: '3%',
     flex: 3,
-    shadowOffset: { height: 1, width: 1 },
-    shadowColor: '#545454',
-    shadowOpacity: 1.0,
-    flex: 3,
-  },
-  box: {
     borderRadius: 5,
     borderBottomWidth: 3,
     borderRightWidth: 3,
     borderColor: '#cccccc',
     backgroundColor: 'white',
+    shadowOffset: { height: 1, width: 1 },
+    shadowColor: '#545454',
+    shadowOpacity: 1.0,
+  },
+  box: {
     flex: 1,
     height: 50,
     justifyContent: 'center',
