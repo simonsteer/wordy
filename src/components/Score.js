@@ -73,7 +73,7 @@ export default class Score extends React.Component {
         this.animatedValue,
         {
           toValue: 2,
-          delay: 300,
+          delay: 500,
           duration: 100,
           easing: Easing.ease,
           useNativeDriver: true,

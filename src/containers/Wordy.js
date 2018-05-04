@@ -1,6 +1,6 @@
 import React from 'react'
 import Board from './Board'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import BonusAlerts from './BonusAlerts'
 import ScoreAndTime from './ScoreAndTime'
 import CurrentWordAndSubmit from './CurrentWordAndSubmit'
@@ -48,9 +48,6 @@ export default class Wordy extends React.Component {
     )
   }
 }
-
-const deviceWidth = Dimensions.get('window').width
-const deviceHeight = Dimensions.get('window').height
 
 const styles = StyleSheet.create({
   container: {
