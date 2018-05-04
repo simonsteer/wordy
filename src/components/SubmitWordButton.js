@@ -62,7 +62,7 @@ export default class SubmitWordButton extends React.Component {
         duration: 100,
         easing: Easing.ease,
       },
-    ).start(this.normalize)
+    ).start(() => this.normalize())
   }
 
   normalize() {
