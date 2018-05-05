@@ -108,14 +108,14 @@ export default (state = game, action) => {
         }
       })
 
-      const activeBonus = speedBonuses({ ...state, scoredWords, wpm }).find(bonus =>
-          bonus.meets_conditions) || {}
+      // const activeBonus = speedBonuses({ ...state, scoredWords, wpm }).find(bonus =>
+      //     bonus.meets_conditions) || {}
 
       return {
         ...state,
         score: score + wordScore,
         scoredWords,
-        activeBonus,
+        // activeBonus,
         bonusAlerts: [...state.bonusAlerts, ...newBonusAlerts],
         currentWordIsValid: false,
         scoringInProgress: true,
@@ -179,6 +179,7 @@ const speedBonuses = nextState => [
       nextState.wpm < 25,
     multiplier: 2,
     required_wpm: 15,
+    level: 1,
   },
   {
     title: 'Quicker Thinker',
@@ -190,6 +191,7 @@ const speedBonuses = nextState => [
       nextState.wpm < 35,
     multiplier: 4,
     required_wpm: 25,
+    level: 2,
   },
   {
     title: 'Speed Demon',
@@ -200,5 +202,6 @@ const speedBonuses = nextState => [
       nextState.wpm >= 35,
     multiplier: 6,
     required_wpm: 35,
+    level: 3,
   },
 ]
