@@ -7,7 +7,7 @@ import { dictionary3 } from '../utils/dictionary3'
 import _ from 'lodash'
 
 const game = {
-    letters: 'HAPPYHAPPYHAPPYHAPPYHAPPY'.split(''),
+    letters: 'YESNOYESNOYESNOYESNOYESNO'.split(''),
     currentWord: [],
     currentWordIsValid: false,
     scoringInProgress: false,
@@ -76,20 +76,29 @@ export default (state = game, action) => {
           removedWord.length > 2,
       }
     case 'SCORE_WORD_START':
-      const wordString = currentWord
+      const time = new Date().getTime()
+      const string = currentWord
         .map(letterData => letterData.letter)
         .join('')
 
-      const scoredWords = state.scoredWords.concat(wordString)
+      const scoredWord = {
+        string,
+        time,
+      }
+      const scoredWords = state.scoredWords.concat(scoredWord)
+      
+      const lastWords = [...scoredWords].reverse().slice(0,5)
+      const wpm = scoredWords.length > 1
+        ? 60 / (((lastWords[0].time - lastWords[lastWords.length - 1].time) / 1000) / lastWords.length)
+        : 0
 
       let wordScore = currentWord.reduce((total, letterData) => {
         return total + letterConfig[letterData.letter].points
       }, 0)
-
       const newBonusAlerts = []
-
-      scoreWordBonuses.forEach(bonus => {
-        if (bonus.meets_conditions({ ...state, scoredWords })) {
+      
+      scoredWordBonuses({ ...state, scoredWords, wpm }).forEach(bonus => {
+        if (bonus.meets_conditions) {
           wordScore = wordScore * bonus.multiplier
 
           newBonusAlerts.push({
@@ -99,13 +108,18 @@ export default (state = game, action) => {
         }
       })
 
+      const activeBonus = speedBonuses({ ...state, scoredWords, wpm }).find(bonus =>
+          bonus.meets_conditions) || {}
+
       return {
         ...state,
-        score: state.score + wordScore,
+        score: score + wordScore,
         scoredWords,
+        activeBonus,
         bonusAlerts: [...state.bonusAlerts, ...newBonusAlerts],
         currentWordIsValid: false,
         scoringInProgress: true,
+        wpm,
       }
     case 'SCORE_WORD_FINISH':
       const newLetters = letters.map((letter, index) => {
@@ -134,22 +148,57 @@ export default (state = game, action) => {
   }
 }
 
-const scoreWordBonuses = [
+const scoredWordBonuses = nextState => [
   {
-    description: 'Spell the same word twice in a row',
-    effect: 'TRIPLE SCORE',
-    meets_conditions: nextState =>
-      nextState.scoredWords.length >= 2 &&
-      _.last(nextState.scoredWords) === _.last(_.initial(nextState.scoredWords)),
-    multiplier: 3,
+    description: 'Scored a palindrome',
+    effect: '3X POINTS',
+    multiplier: 5,
+    meets_conditions:
+      _.last(nextState.scoredWords).string.split('').every((char, i, word) =>
+        char === word[word.length - 1 - i]),
   },
   {
-    description: 'Spell two 5 letter words in a row',
-    effect: 'QUINTUPLE SCORE',
-    meets_conditions: nextState =>
+    description: `Score two ${_.last(nextState.scoredWords).string.length}-letter words in a row`,
+    effect: `${_.last(nextState.scoredWords).string.length}X POINTS`,
+    multiplier: _.last(nextState.scoredWords).string.length,
+    meets_conditions:
       nextState.scoredWords.length >= 2 &&
-      _.last(nextState.scoredWords).length === 5 && _.last(_.initial(nextState.scoredWords)).length === 5,
-    multiplier: 5,
+      _.last(nextState.scoredWords).string.length > 3 &&
+      _.last(nextState.scoredWords).string.length === _.last(_.initial(nextState.scoredWords)).string.length,
   },
 ]
 
+const speedBonuses = nextState => [
+  {
+    title: 'On The Fly',
+    description: `Score more than 20 words per minute to maintain`,
+    effect: '2X POINTS',
+    meets_conditions:
+      nextState.scoredWords.length > 4 &&
+      nextState.wpm >= 15 &&
+      nextState.wpm < 25,
+    multiplier: 2,
+    required_wpm: 15,
+  },
+  {
+    title: 'Quicker Thinker',
+    description: `Score more than 25 words per minute`,
+    effect: '4X POINTS',
+    meets_conditions:
+      nextState.scoredWords.length > 4 &&
+      nextState.wpm >= 25 &&
+      nextState.wpm < 35,
+    multiplier: 4,
+    required_wpm: 25,
+  },
+  {
+    title: 'Speed Demon',
+    description: `Score more than 35 words per minute`,
+    effect: '6X POINTS',
+    meets_conditions:
+      nextState.scoredWords.length > 4 &&
+      nextState.wpm >= 35,
+    multiplier: 6,
+    required_wpm: 35,
+  },
+]

@@ -16,7 +16,6 @@ export default class Score extends React.Component {
     if (nextProps.game.score !== this.props.game.score) {
       const incomingPoints = nextProps.game.score - this.props.game.score
 
-      console.log(incomingPoints)
       this.setState({
         incomingPoints,
       })
@@ -73,7 +72,7 @@ export default class Score extends React.Component {
         this.animatedValue,
         {
           toValue: 2,
-          delay: 500,
+          delay: 300,
           duration: 100,
           easing: Easing.ease,
           useNativeDriver: true,

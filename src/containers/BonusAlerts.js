@@ -6,8 +6,8 @@ import Timer from 'timer.js'
 const secondsBetweenAlerts = 1
 
 class BonusAlerts extends React.Component {
-  constructor() {
-    super()
+  constructor(props) {
+    super(props)
     this.animatedValue = new Animated.Value(0)
     this.state = {
       timer: new Timer({
@@ -105,5 +105,6 @@ const styles = StyleSheet.create({
   },
   bottomText: {
     fontSize: 24,
+    fontWeight: 'bold',
   },
 })

@@ -54,7 +54,6 @@ export default class SubmitWordButton extends React.Component {
   }
 
   flash(currentWordIsValid) {
-    console.log('flashing')
     Animated.timing(
       this.colorValue,
       {

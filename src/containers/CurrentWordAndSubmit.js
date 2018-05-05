@@ -7,8 +7,8 @@ const CurrentWordAndSubmit = ({ game, dispatch }) =>
   <View style={styles.gui}>
     <CurrentWord currentWord={game.currentWord} />
     <SubmitWordButton
-      currentWordIsValid={game.currentWordIsValid}
       currentWord={game.currentWord}
+      currentWordIsValid={game.currentWordIsValid}
       onPress={() => {
         if (game.currentWordIsValid) {
           dispatch({ type: 'SCORE_WORD_START' })
