@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import Score from '../components/Score'
 import GameTimer from '../components/GameTimer'
 
-const ScoreAndTime = ({ game }) => 
+const ScoreAndTime = ({ game }) => (
   <View style={styles.gui}>
     <Score game={game} />
     <GameTimer
@@ -11,7 +11,7 @@ const ScoreAndTime = ({ game }) =>
       currentWord={game.currentWord}
     />
   </View>
-
+)
 
 export default ScoreAndTime
 

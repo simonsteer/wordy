@@ -1,5 +1,11 @@
 import React from 'react'
-import { Text, Animated, Easing, TouchableWithoutFeedback, StyleSheet } from 'react-native'
+import {
+  Text,
+  Animated,
+  Easing,
+  TouchableWithoutFeedback,
+  StyleSheet,
+} from 'react-native'
 import letters from '../config/letters'
 import customStyles from '../utils/customStyles'
 
@@ -36,16 +42,20 @@ export default class SubmitWordButton extends React.Component {
           this.flash(currentWordIsValid)
         }}
       >
-        <Animated.View style={[
-          styles.container,
-          customStyles.flatShadow,
-          { backgroundColor },
-          { borderColor },
-        ]}>
-          <Text style={[
-            styles.submit,
-            currentWord.length < 3 && { color: '#bababa' },
-          ]}>
+        <Animated.View
+          style={[
+            styles.container,
+            customStyles.flatShadow,
+            { backgroundColor },
+            { borderColor },
+          ]}
+        >
+          <Text
+            style={[
+              styles.submit,
+              currentWord.length < 3 && { color: '#bababa' },
+            ]}
+          >
             SUBMIT
           </Text>
         </Animated.View>
@@ -54,25 +64,19 @@ export default class SubmitWordButton extends React.Component {
   }
 
   flash(currentWordIsValid) {
-    Animated.timing(
-      this.colorValue,
-      {
-        toValue: currentWordIsValid ? 0 : 2,
-        duration: 100,
-        easing: Easing.ease,
-      },
-    ).start(() => this.normalize())
+    Animated.timing(this.colorValue, {
+      toValue: currentWordIsValid ? 0 : 2,
+      duration: 100,
+      easing: Easing.ease,
+    }).start(() => this.normalize())
   }
 
   normalize() {
-    Animated.timing(
-      this.colorValue,
-      {
-        toValue: 1,
-        duration: 100,
-        easing: Easing.linear,
-      },
-    ).start()
+    Animated.timing(this.colorValue, {
+      toValue: 1,
+      duration: 100,
+      easing: Easing.linear,
+    }).start()
   }
 }
 

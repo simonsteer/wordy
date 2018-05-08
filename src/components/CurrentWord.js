@@ -11,19 +11,26 @@ const CurrentWord = ({ currentWord }) => {
   let currentWordString = currentWord
     .map(letterData => letterData.letter)
     .join('')
-  
+
   if (currentWordString.length > 9) {
-    currentWordString = '...'.concat(currentWordString.slice(currentWordString.length - 9))
-  } 
+    currentWordString = '...'.concat(
+      currentWordString.slice(currentWordString.length - 9)
+    )
+  }
 
   const currentWordAndScore = currentWordScore
-    ? currentWordString + (` (${currentWordScore})`)
+    ? currentWordString + ` (${currentWordScore})`
     : ''
 
   return (
     <View style={styles.container}>
       <View style={styles.box}>
-        <Text style={[styles.currentWord, !currentWordAndScore && { color: '#bababa' } ]}>
+        <Text
+          style={[
+            styles.currentWord,
+            !currentWordAndScore && { color: '#bababa' },
+          ]}
+        >
           {currentWordAndScore ? currentWordAndScore : 'START SPELLING!'}
         </Text>
       </View>

@@ -1,9 +1,16 @@
 import React from 'react'
-import { View, Text, StyleSheet, Animated, Easing, Dimensions } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Animated,
+  Easing,
+  Dimensions,
+} from 'react-native'
 
 import Timer from 'timer.js'
 
-const secondsBetweenAlerts = 1
+const secondsBetweenAlerts = 2
 
 class BonusAlerts extends React.Component {
   constructor(props) {
@@ -13,7 +20,7 @@ class BonusAlerts extends React.Component {
       timer: new Timer({
         tick: secondsBetweenAlerts,
         ontick: () => this.endAlert(),
-      })
+      }),
     }
   }
 
@@ -21,7 +28,9 @@ class BonusAlerts extends React.Component {
     if (nextProps.bonusAlerts.length !== this.props.bonusAlerts.length) {
       this.beginAlert()
       this.state.timer.stop()
-      this.state.timer.start((nextProps.bonusAlerts.length + 1) * secondsBetweenAlerts)
+      this.state.timer.start(
+        (nextProps.bonusAlerts.length + 1) * secondsBetweenAlerts
+      )
     }
   }
 
@@ -42,47 +51,51 @@ class BonusAlerts extends React.Component {
       <View style={styles.container}>
         {bonusAlerts.length && (
           <View style={styles.bonus}>
-            <Animated.Text style={[styles.topText, { transform: [{ translateX: topTextTranslateX }] }]}>
+            <Animated.Text
+              style={[
+                styles.topText,
+                { transform: [{ translateX: topTextTranslateX }] },
+              ]}
+            >
               {bonusAlerts[0].description}
             </Animated.Text>
-            <Animated.Text style={[styles.bottomText, { transform: [{ translateX: bottomTextTranslateX }] }]}>
+            <Animated.Text
+              style={[
+                styles.bottomText,
+                { transform: [{ translateX: bottomTextTranslateX }] },
+              ]}
+            >
               {bonusAlerts[0].effect}
             </Animated.Text>
           </View>
         )}
       </View>
-    ) 
+    )
   }
 
   dismissAlert = () => this.props.dispatch({ type: 'DISMISS_BONUS_ALERT' })
 
   beginAlert() {
-    Animated.spring(
-      this.animatedValue,
-      {
-        toValue: 1,
-        tension: 200,
-        friction: 8,
-        useNativeDriver: true,
-      }
-    ).start()
+    Animated.spring(this.animatedValue, {
+      toValue: 1,
+      tension: 200,
+      friction: 8,
+      useNativeDriver: true,
+    }).start()
   }
 
   endAlert() {
-    Animated.timing(
-      this.animatedValue,
-      {
-        toValue: 2,
-        duration: 200,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      }
-    ).start(() => {
+    Animated.timing(this.animatedValue, {
+      toValue: 2,
+      duration: 200,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start(() => {
       this.animatedValue.setValue(0)
       this.dismissAlert()
     })
   }
-} 
+}
 
 export default BonusAlerts
 

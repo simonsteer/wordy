@@ -1,5 +1,12 @@
 import React from 'react'
-import { Text, View, StyleSheet, Animated, Easing, TouchableWithoutFeedback } from 'react-native'
+import {
+  Text,
+  View,
+  StyleSheet,
+  Animated,
+  Easing,
+  TouchableWithoutFeedback,
+} from 'react-native'
 import _ from 'lodash'
 import customStyles from '../utils/customStyles'
 import addToChain from '../actions/addToChain'
@@ -10,7 +17,7 @@ import letters from '../config/letters'
 import Timer from 'timer.js'
 
 export default class Tile extends React.Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
     this.spinValue = new Animated.Value(0)
     this.tileRotations = [-17, -13, -9, 9, 13, 17]
@@ -18,7 +25,7 @@ export default class Tile extends React.Component {
       spinAmount: 0,
       scramble: false,
       scrambleTimer: new Timer({
-        tick: 0.030,
+        tick: 0.03,
         ontick: this.scramble,
       }),
       excludeFromScramble: [props.letter],
@@ -75,11 +82,11 @@ export default class Tile extends React.Component {
           onPress={() => this.handlePress(letter, index)}
         >
           <View style={styles.tile}>
-          <Animated.View style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]} />
+            <Animated.View
+              style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]}
+            />
             <Text style={styles.letter}>
-              {this.state.scramble
-                ? this.state.scramble
-                : letter}
+              {this.state.scramble ? this.state.scramble : letter}
             </Text>
 
             <Text style={styles.points}>
@@ -95,12 +102,14 @@ export default class Tile extends React.Component {
 
   handlePress(letter, index) {
     if (this.props.canChain && !this.props.isChained) {
-      this.props.dispatch(addToChain({
-        letter,
-        index
-      }))
+      this.props.dispatch(
+        addToChain({
+          letter,
+          index,
+        })
+      )
     }
-    
+
     if (this.props.isChained) {
       this.props.dispatch(removeFromChain(index))
     }
@@ -111,27 +120,21 @@ export default class Tile extends React.Component {
       spinAmount: _.sample(this.tileRotations),
     })
 
-    Animated.spring(
-      this.spinValue,
-      {
-        toValue: 1,
-        tension: 400,
-        friction: 8,
-        useNativeDriver: true,
-      },
-    ).start()
+    Animated.spring(this.spinValue, {
+      toValue: 1,
+      tension: 400,
+      friction: 8,
+      useNativeDriver: true,
+    }).start()
   }
 
   unspin(scoringInProgress) {
-    Animated.timing(
-      this.spinValue,
-      {
-        toValue: 0,
-        duration: 100,
-        easing: Easing.ease,
-        useNativeDriver: true,
-      },
-    ).start(() => {
+    Animated.timing(this.spinValue, {
+      toValue: 0,
+      duration: 100,
+      easing: Easing.ease,
+      useNativeDriver: true,
+    }).start(() => {
       this.setState({ spinAmount: 0 })
 
       if (scoringInProgress) {
@@ -146,12 +149,17 @@ export default class Tile extends React.Component {
 
   scramble = () => {
     const letters_array = Object.keys(letters)
-    const unseenLetters = _.difference(letters_array, this.state.excludeFromScramble)
+    const unseenLetters = _.difference(
+      letters_array,
+      this.state.excludeFromScramble
+    )
     const scrambleLetter = _.sample(unseenLetters)
 
     this.setState({
       scramble: scrambleLetter,
-      excludeFromScramble: this.state.excludeFromScramble.concat(scrambleLetter),
+      excludeFromScramble: this.state.excludeFromScramble.concat(
+        scrambleLetter
+      ),
     })
   }
 }
@@ -160,11 +168,11 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    backgroundColor: 'rgb(255,215,0)',
     borderRadius: 5,
     borderBottomWidth: 3,
     borderRightWidth: 3,
-    borderColor: 'goldenrod',
+    backgroundColor: 'rgb(255,215,0)',
+    borderColor: 'rgb(218,165,32)',
   },
   tile: {
     justifyContent: 'center',

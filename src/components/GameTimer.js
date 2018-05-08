@@ -15,17 +15,18 @@ export default class GameTimer extends React.Component {
       timer: new Timer({
         tick: 1,
         ontick: this.decrement,
-      })
+      }),
     }
   }
 
   componentWillReceiveProps = nextProps => {
     if (nextProps.scoringInProgress) {
       const secondsLeft = Math.floor(this.state.timer.getDuration() / 1000)
-      const updatedTime = secondsLeft + this.props.currentWord.length < 61
-        ? secondsLeft + this.props.currentWord.length
-        : 60
-      
+      const updatedTime =
+        secondsLeft + this.props.currentWord.length < 61
+          ? secondsLeft + this.props.currentWord.length
+          : 60
+
       if (updatedTime > 10 && this.state.inDanger) {
         this.normalize()
         this.setState({ inDanger: false })
@@ -42,30 +43,27 @@ export default class GameTimer extends React.Component {
   componentDidMount() {
     this.state.timer.start(20)
   }
-  
-  render() {
 
+  render() {
     const backgroundColor = this.colorValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [
-        'rgb(255, 255, 255)',
-        'rgb(255, 150, 150)',
-      ],
+      outputRange: ['rgb(255, 255, 255)', 'rgb(255, 150, 150)'],
     })
 
     const borderColor = this.colorValue.interpolate({
       inputRange: [0, 1],
-      outputRange: [
-        'rgb(204, 204, 204)',
-        'rgb(255, 99, 99)',
-      ],
+      outputRange: ['rgb(204, 204, 204)', 'rgb(255, 99, 99)'],
     })
 
     return (
-      <Animated.View style={[styles.container, customStyles.flatShadow, { borderColor, backgroundColor }]}>
-        <Text style={styles.timer}>
-          {getTimerString(this.state.time)}
-        </Text>
+      <Animated.View
+        style={[
+          styles.container,
+          customStyles.flatShadow,
+          { borderColor, backgroundColor },
+        ]}
+      >
+        <Text style={styles.timer}>{timeToString(this.state.time)}</Text>
       </Animated.View>
     )
   }
@@ -81,29 +79,23 @@ export default class GameTimer extends React.Component {
       this.setState({ inDanger: true })
     }
   }
-  
+
   red() {
-    Animated.timing(
-      this.colorValue,
-      {
-        toValue: 1,
-        duration: 500,
-        easing: Easing.linear,
-      },
-    ).start()
+    Animated.timing(this.colorValue, {
+      toValue: 1,
+      duration: 500,
+      easing: Easing.linear,
+    }).start()
   }
 
   normalize() {
-    Animated.timing(
-      this.colorValue,
-      {
-        toValue: 0,
-        duration: 500,
-        easing: Easing.linear,
-      },
-    ).start()
+    Animated.timing(this.colorValue, {
+      toValue: 0,
+      duration: 500,
+      easing: Easing.linear,
+    }).start()
   }
-}  
+}
 
 const styles = StyleSheet.create({
   container: {
@@ -127,13 +119,11 @@ const styles = StyleSheet.create({
   },
 })
 
-const getTimerString = timeInSeconds => {
+const timeToString = timeInSeconds => {
   let minutes
   let seconds
-  const secondsPrefix = timeInSeconds < 10
-    ? '0'
-    : ''
-  
+  const secondsPrefix = timeInSeconds < 10 ? '0' : ''
+
   if (timeInSeconds < 60) {
     seconds = secondsPrefix + timeInSeconds
     minutes = 0

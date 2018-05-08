@@ -4,19 +4,23 @@ import Tile from '../components/Tile'
 import Connection from '../components/Connection'
 
 const LetterConnections = ({ letters, currentWord, scoringInProgress }) => {
-  const currentWordString = currentWord.map(letterData => letterData.letter).join('')
+  const currentWordString = currentWord
+    .map(letterData => letterData.letter)
+    .join('')
 
   return (
     <View style={styles.container} pointerEvents="none">
       {letters.map((l, index) => {
         const indexInChain = currentWord.map(l => l.index).indexOf(index)
-        const connection = indexInChain > 0
-          ? currentWord[indexInChain].index - currentWord[indexInChain - 1].index
-          : 0
+        const connection =
+          indexInChain > 0
+            ? currentWord[indexInChain].index -
+              currentWord[indexInChain - 1].index
+            : 0
 
         const first = indexInChain === 1
         const last = indexInChain === currentWord.length - 1
-          
+
         return (
           <View
             key={`connection-${index}`}

@@ -28,7 +28,7 @@ export default class Score extends React.Component {
 
     const translateY = this.animatedValue.interpolate({
       inputRange: [0, 1, 2],
-      outputRange: [50, 0 , -50],
+      outputRange: [50, 0, -50],
     })
 
     const opacity = this.animatedValue.interpolate({
@@ -59,25 +59,19 @@ export default class Score extends React.Component {
 
   rollIncomingPoints() {
     Animated.sequence([
-      Animated.timing(
-        this.animatedValue,
-        {
-          toValue: 1,
-          duration: 100,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }
-      ),
-      Animated.timing(
-        this.animatedValue,
-        {
-          toValue: 2,
-          delay: 300,
-          duration: 100,
-          easing: Easing.ease,
-          useNativeDriver: true,
-        }
-      ),
+      Animated.timing(this.animatedValue, {
+        toValue: 1,
+        duration: 100,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
+      Animated.timing(this.animatedValue, {
+        toValue: 2,
+        delay: 300,
+        duration: 100,
+        easing: Easing.ease,
+        useNativeDriver: true,
+      }),
     ]).start(() => this.animatedValue.setValue(0))
   }
 }

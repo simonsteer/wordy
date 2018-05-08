@@ -3,7 +3,7 @@ import _ from 'lodash'
 
 const getRandomLetter = unweighted => {
   if (unweighted) {
-     return _.sample(Object.keys(letters))
+    return _.sample(Object.keys(letters))
   }
 
   const weightedArray = []

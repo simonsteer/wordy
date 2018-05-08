@@ -9,14 +9,8 @@ import { connect } from 'react-redux'
 })
 export default class Wordy extends React.Component {
   render() {
-    const {
-      dispatch,
-      game,
-    } = this.props
+    const { dispatch, game } = this.props
 
-    return (
-      <Game game={game} dispatch={dispatch}/>
-    )
+    return <Game game={game} dispatch={dispatch} />
   }
 }
-  

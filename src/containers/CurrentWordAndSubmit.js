@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native'
 import CurrentWord from '../components/CurrentWord'
 import SubmitWordButton from '../components/SubmitWordButton'
 
-const CurrentWordAndSubmit = ({ game, dispatch }) => 
+const CurrentWordAndSubmit = ({ game, dispatch }) => (
   <View style={styles.gui}>
     <CurrentWord currentWord={game.currentWord} />
     <SubmitWordButton
@@ -16,7 +16,7 @@ const CurrentWordAndSubmit = ({ game, dispatch }) =>
       }}
     />
   </View>
-
+)
 
 export default CurrentWordAndSubmit
 

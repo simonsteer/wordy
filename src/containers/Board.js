@@ -4,29 +4,45 @@ import Tile from '../components/Tile'
 import Connection from '../components/Connection'
 import LetterConnections from './LetterConnections'
 
-const Board = ({ scoringInProgress, score, letters, currentWord, currentWordIsValid, dispatch }) => {
-  const currentWordString = currentWord.map(letterData => letterData.letter).join('')
-  
+import _ from 'lodash'
+
+const Board = ({
+  scoringInProgress,
+  score,
+  letters,
+  currentWord,
+  currentWordIsValid,
+  dispatch,
+}) => {
+  const currentWordString = currentWord
+    .map(letterData => letterData.letter)
+    .join('')
+
   return (
     <View style={styles.container}>
       <View style={styles.board}>
         {letters.map((l, index) => {
-          const isChained = !!currentWord.find(letterData =>
-            letterData.index === index
+          const isChained = !!currentWord.find(
+            letterData => letterData.index === index
           )
 
           const canChain =
             currentWord.length === 0 ||
-            (!isChained && (
-              currentWord[currentWord.length - 1].index + 1 === index && index % 5 !== 0 ||
-              currentWord[currentWord.length - 1].index - 1 === index && index % 5 !== 4 ||
-              currentWord[currentWord.length - 1].index + 6 === index && index % 5 !== 0 ||
-              currentWord[currentWord.length - 1].index - 6 === index && index % 5 !== 4 ||
-              currentWord[currentWord.length - 1].index + 4 === index && index % 5 !== 4 ||
-              currentWord[currentWord.length - 1].index - 4 === index && index % 5 !== 0 ||
-              currentWord[currentWord.length - 1].index + 5 === index ||
-              currentWord[currentWord.length - 1].index - 5 === index
-            ))
+            (!isChained &&
+              ((currentWord[currentWord.length - 1].index + 1 === index &&
+                index % 5 !== 0) ||
+                (currentWord[currentWord.length - 1].index - 1 === index &&
+                  index % 5 !== 4) ||
+                (currentWord[currentWord.length - 1].index + 6 === index &&
+                  index % 5 !== 0) ||
+                (currentWord[currentWord.length - 1].index - 6 === index &&
+                  index % 5 !== 4) ||
+                (currentWord[currentWord.length - 1].index + 4 === index &&
+                  index % 5 !== 4) ||
+                (currentWord[currentWord.length - 1].index - 4 === index &&
+                  index % 5 !== 0) ||
+                currentWord[currentWord.length - 1].index + 5 === index ||
+                currentWord[currentWord.length - 1].index - 5 === index))
 
           return (
             <View
@@ -51,7 +67,11 @@ const Board = ({ scoringInProgress, score, letters, currentWord, currentWordIsVa
           )
         })}
       </View>
-      <LetterConnections letters={letters} currentWord={currentWord} scoringInProgress={scoringInProgress} />
+      <LetterConnections
+        letters={letters}
+        currentWord={currentWord}
+        scoringInProgress={scoringInProgress}
+      />
     </View>
   )
 }
