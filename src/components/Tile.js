@@ -7,13 +7,13 @@ import {
   Easing,
   TouchableWithoutFeedback,
 } from 'react-native'
-import _ from 'lodash'
 import customStyles from '../utils/customStyles'
 import addToChain from '../actions/addToChain'
 import removeFromChain from '../actions/removeFromChain'
-import Connection from './Connection'
 import letters from '../config/letters'
 
+import sample from 'lodash/sample'
+import difference from 'lodash/difference'
 import Timer from 'timer.js'
 
 export default class Tile extends React.Component {
@@ -48,7 +48,7 @@ export default class Tile extends React.Component {
   }
 
   render() {
-    const { index, isChained, letter, currentWord } = this.props
+    const { index, isChained, letter, currentWord, explode } = this.props
 
     const rotate = this.spinValue.interpolate({
       inputRange: [0, 1],
@@ -117,7 +117,7 @@ export default class Tile extends React.Component {
 
   spin() {
     this.setState({
-      spinAmount: _.sample(this.tileRotations),
+      spinAmount: sample(this.tileRotations),
     })
 
     Animated.spring(this.spinValue, {
@@ -149,11 +149,11 @@ export default class Tile extends React.Component {
 
   scramble = () => {
     const letters_array = Object.keys(letters)
-    const unseenLetters = _.difference(
+    const unseenLetters = difference(
       letters_array,
       this.state.excludeFromScramble
     )
-    const scrambleLetter = _.sample(unseenLetters)
+    const scrambleLetter = sample(unseenLetters)
 
     this.setState({
       scramble: scrambleLetter,

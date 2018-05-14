@@ -10,7 +10,7 @@ import {
 
 import Timer from 'timer.js'
 
-const secondsBetweenAlerts = 2
+const secondsBetweenAlerts = 1
 
 class BonusAlerts extends React.Component {
   constructor(props) {

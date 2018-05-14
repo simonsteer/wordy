@@ -16,9 +16,7 @@ export default class Score extends React.Component {
     if (nextProps.game.score !== this.props.game.score) {
       const incomingPoints = nextProps.game.score - this.props.game.score
 
-      this.setState({
-        incomingPoints,
-      })
+      this.setState({ incomingPoints })
       this.rollIncomingPoints()
     }
   }
@@ -48,6 +46,7 @@ export default class Score extends React.Component {
               { paddingRight: 15 },
               { transform: [{ translateY }] },
               { opacity },
+              { color: 'rgb(50, 215, 50)' },
             ]}
           >
             {'+' + this.state.incomingPoints}
@@ -67,7 +66,7 @@ export default class Score extends React.Component {
       }),
       Animated.timing(this.animatedValue, {
         toValue: 2,
-        delay: 300,
+        delay: 500,
         duration: 100,
         easing: Easing.ease,
         useNativeDriver: true,
@@ -93,7 +92,6 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     height: 50,
     flex: 1,
-    overflow: 'hidden',
   },
   score: {
     fontWeight: 'bold',

@@ -4,10 +4,11 @@ import { dictionary1 } from '../utils/dictionary1'
 import { dictionary2 } from '../utils/dictionary2'
 import { dictionary3 } from '../utils/dictionary3'
 
-import _ from 'lodash'
+import last from 'lodash/last'
+import initial from 'lodash/initial'
 
 const game = {
-  letters: 'YESNOYESNOYESNOYESNOYESNO'.split(''),
+  letters: [],
   currentWord: [],
   currentWordIsValid: false,
   scoringInProgress: false,
@@ -143,7 +144,7 @@ export default (state = game, action) => {
 }
 
 const scoredWordBonuses = nextState => {
-  const lastWord = _.last(nextState.scoredWords).string
+  const lastWord = last(nextState.scoredWords).string
   const extraPoints = multiplier => {
     return (
       lastWord.split('').reduce((total, letter) => {
@@ -158,7 +159,7 @@ const scoredWordBonuses = nextState => {
       description: 'Scored a palindrome',
       effect: `with ${lastWord} for +${extraPoints(5)}pts`,
       multiplier: 5,
-      meets_conditions: _.last(nextState.scoredWords)
+      meets_conditions: last(nextState.scoredWords)
         .string.split('')
         .every((char, i, word) => char === word[word.length - 1 - i]),
     },
@@ -168,22 +169,22 @@ const scoredWordBonuses = nextState => {
       multiplier: 2,
       meets_conditions:
         nextState.scoredWords.length >= 2 &&
-        _.last(nextState.scoredWords).string ===
-          _.last(_.initial(nextState.scoredWords)).string,
+        last(nextState.scoredWords).string ===
+          last(initial(nextState.scoredWords)).string,
     },
     {
       description: `Score two ${
-        _.last(nextState.scoredWords).string.length
+        last(nextState.scoredWords).string.length
       }-letter words in a row`,
       effect: `with ${lastWord} for +${extraPoints(
-        _.last(nextState.scoredWords).string.length
+        last(nextState.scoredWords).string.length
       )}pts`,
-      multiplier: _.last(nextState.scoredWords).string.length,
+      multiplier: last(nextState.scoredWords).string.length,
       meets_conditions:
         nextState.scoredWords.length >= 2 &&
-        _.last(nextState.scoredWords).string.length > 3 &&
-        _.last(nextState.scoredWords).string.length ===
-          _.last(_.initial(nextState.scoredWords)).string.length,
+        last(nextState.scoredWords).string.length > 3 &&
+        last(nextState.scoredWords).string.length ===
+          last(initial(nextState.scoredWords)).string.length,
     },
   ]
 }

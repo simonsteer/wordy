@@ -1,9 +1,9 @@
 import letters from '../config/letters'
-import _ from 'lodash'
+import sample from 'lodash/sample'
 
 const getRandomLetter = unweighted => {
   if (unweighted) {
-    return _.sample(Object.keys(letters))
+    return sample(Object.keys(letters))
   }
 
   const weightedArray = []
@@ -12,7 +12,7 @@ const getRandomLetter = unweighted => {
       weightedArray.push(l)
     }
   })
-  return _.sample(weightedArray)
+  return sample(weightedArray)
 }
 
 export default getRandomLetter
