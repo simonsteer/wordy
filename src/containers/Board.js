@@ -21,7 +21,6 @@ export default class Board extends React.Component {
   constructor() {
     super()
     this.state = {
-      isDragging: false,
       activeTile: null,
     }
     this._panResponder = PanResponder.create({
@@ -127,13 +126,27 @@ export default class Board extends React.Component {
 
     const index = yCoord * 5 + xCoord
 
-    if (index === this.state.activeTile) {
+    const xDepthIntoTile = e.nativeEvent.pageX / tileSize - xCoord
+    const yDepthIntoTile = (e.nativeEvent.pageY - yOffset) / tileSize - yCoord
+
+    const withinRange =
+      this.props.currentWord.length === 0 ||
+      (xDepthIntoTile > 0.15 &&
+        xDepthIntoTile < 0.85 &&
+        yDepthIntoTile > 0.15 &&
+        yDepthIntoTile < 0.85)
+
+    if (
+      index === this.state.activeTile ||
+      index < 0 ||
+      index > 24 ||
+      !withinRange
+    ) {
       return
     }
 
-    this.setState({ activeTile: index })
-
     const { canChain, isChained, letter } = this['tile' + index].props
+    this.setState({ activeTile: index })
 
     if (canChain) {
       this['tile' + index].spin()
