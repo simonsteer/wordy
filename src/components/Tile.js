@@ -13,6 +13,7 @@ import removeFromChain from '../actions/removeFromChain'
 import letters from '../config/letters'
 
 import sample from 'lodash/sample'
+import last from 'lodash/last'
 import difference from 'lodash/difference'
 import Timer from 'timer.js'
 
@@ -33,11 +34,7 @@ export default class Tile extends React.Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.isChained && !this.state.spinAmount) {
-      this.spin()
-    }
-
-    if (!nextProps.isChained && this.state.spinAmount) {
+    if (this.props.isChained && !nextProps.isChained) {
       this.unspin()
     }
 
@@ -78,41 +75,22 @@ export default class Tile extends React.Component {
           },
         ]}
       >
-        <TouchableWithoutFeedback
-          onPress={() => this.handlePress(letter, index)}
-        >
-          <View style={styles.tile}>
-            <Animated.View
-              style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]}
-            />
-            <Text style={styles.letter}>
-              {this.state.scramble ? this.state.scramble : letter}
-            </Text>
+        <View style={styles.tile}>
+          <Animated.View
+            style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]}
+          />
+          <Text style={styles.letter}>
+            {this.state.scramble ? this.state.scramble : letter}
+          </Text>
 
-            <Text style={styles.points}>
-              {this.state.scramble
-                ? letters[this.state.scramble].points
-                : letters[letter].points}
-            </Text>
-          </View>
-        </TouchableWithoutFeedback>
+          <Text style={styles.points}>
+            {this.state.scramble
+              ? letters[this.state.scramble].points
+              : letters[letter].points}
+          </Text>
+        </View>
       </Animated.View>
     )
-  }
-
-  handlePress(letter, index) {
-    if (this.props.canChain && !this.props.isChained) {
-      this.props.dispatch(
-        addToChain({
-          letter,
-          index,
-        })
-      )
-    }
-
-    if (this.props.isChained) {
-      this.props.dispatch(removeFromChain(index))
-    }
   }
 
   spin() {
@@ -142,7 +120,10 @@ export default class Tile extends React.Component {
         this.setState({
           scramble: false,
         })
-        this.props.dispatch({ type: 'SCORE_WORD_FINISH' })
+
+        if (this.props.index === last(this.props.currentWord).index) {
+          this.props.dispatch({ type: 'SCORE_WORD_FINISH' })
+        }
       }
     })
   }

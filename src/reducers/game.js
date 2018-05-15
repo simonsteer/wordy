@@ -105,8 +105,10 @@ export default (state = game, action) => {
         }
       })
 
-      // const activeBonus = speedBonuses({ ...state, scoredWords, wpm }).find(bonus =>
-      //     bonus.meets_conditions) || {}
+      const activeBonus =
+        speedBonuses({ ...state, scoredWords, wpm }).find(
+          bonus => bonus.meets_conditions
+        ) || {}
 
       return {
         ...state,
@@ -114,7 +116,7 @@ export default (state = game, action) => {
         scoringInProgress: true,
         score: score + wordScore,
         bonusAlerts: [...state.bonusAlerts, ...newBonusAlerts],
-        // activeBonus,
+        activeBonus,
         wpm,
         scoredWords,
       }

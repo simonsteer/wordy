@@ -11,7 +11,7 @@ export default class GameTimer extends React.Component {
     this.colorValue = new Animated.Value(0)
     this.state = {
       inDanger: false,
-      time: 20,
+      time: 60,
       timer: new Timer({
         tick: 1,
         ontick: this.decrement,

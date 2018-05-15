@@ -15,6 +15,7 @@ import removeFromChain from '../actions/removeFromChain'
 
 import get from 'lodash/get'
 import last from 'lodash/last'
+import initial from 'lodash/initial'
 
 export default class Board extends React.Component {
   constructor() {
@@ -23,52 +24,16 @@ export default class Board extends React.Component {
       isDragging: false,
       activeTile: null,
     }
-  }
-
-  componentWillMount() {
-    this.props.dispatch({ type: 'START_NEW_GAME' })
-
     this._panResponder = PanResponder.create({
       onMoveShouldSetResponderCapture: () => true,
       onMoveShouldSetPanResponderCapture: () => true,
-
-      onPanResponderGrant: e => {},
-
-      onPanResponderMove: e => {
-        const { dispatch, currentWord } = this.props
-
-        if (!this.state.isDragging) {
-          this.setState({ isDragging: true })
-        }
-
-        const yOffset = (deviceHeight - deviceWidth) / 2
-        const tileSize = deviceWidth / 5
-
-        const xCoord = Math.floor(e.nativeEvent.pageX / tileSize)
-        const yCoord = Math.floor((e.nativeEvent.pageY - yOffset) / tileSize)
-
-        const index = yCoord * 5 + xCoord
-        const letter = this.props.letters[index]
-
-        const { canChain, isChained } = this['tile' + index].props
-
-        if (index === this.state.activeTile) {
-          return
-        }
-
-        this.setState({ activeTile: index })
-
-        if (canChain) {
-          this['tile' + index].spin()
-          dispatch(addToChain({ letter, index }))
-        } else if (isChained) {
-          this['tile' + last(currentWord).index].unspin()
-          dispatch(removeFromChain(last(currentWord).index))
-        }
-      },
-
-      onPanResponderRelease: e => this.setState({ isDragging: false }),
+      onPanResponderMove: e => this.handleMove(e),
+      onPanResponderRelease: this.handleRelease,
     })
+  }
+
+  componentDidMount() {
+    this.props.dispatch({ type: 'START_NEW_GAME' })
   }
 
   render() {
@@ -104,17 +69,18 @@ export default class Board extends React.Component {
             )
 
             const canChain = !i
-              ? true
-              : currentWord.length === 0 ||
-                (!isChained &&
-                  ((i + 1 === index && index % 5 !== 0) ||
-                    (i - 1 === index && index % 5 !== 4) ||
-                    (i + 6 === index && index % 5 !== 0) ||
-                    (i - 6 === index && index % 5 !== 4) ||
-                    (i + 4 === index && index % 5 !== 4) ||
-                    (i - 4 === index && index % 5 !== 0) ||
-                    i + 5 === index ||
-                    i - 5 === index))
+              ? !scoringInProgress && true
+              : !scoringInProgress &&
+                (currentWord.length === 0 ||
+                  (!isChained &&
+                    ((i + 1 === index && index % 5 !== 0) ||
+                      (i - 1 === index && index % 5 !== 4) ||
+                      (i + 6 === index && index % 5 !== 0) ||
+                      (i - 6 === index && index % 5 !== 4) ||
+                      (i + 4 === index && index % 5 !== 4) ||
+                      (i - 4 === index && index % 5 !== 0) ||
+                      i + 5 === index ||
+                      i - 5 === index)))
 
             return (
               <View
@@ -148,6 +114,50 @@ export default class Board extends React.Component {
         />
       </View>
     )
+  }
+
+  handleMove = e => {
+    const { dispatch, currentWordIsValid } = this.props
+
+    const yOffset = (deviceHeight - deviceWidth) / 2
+    const tileSize = deviceWidth / 5
+
+    const xCoord = Math.floor(e.nativeEvent.pageX / tileSize)
+    const yCoord = Math.floor((e.nativeEvent.pageY - yOffset) / tileSize)
+
+    const index = yCoord * 5 + xCoord
+
+    if (index === this.state.activeTile) {
+      return
+    }
+
+    this.setState({ activeTile: index })
+
+    const { canChain, isChained, letter } = this['tile' + index].props
+
+    if (canChain) {
+      this['tile' + index].spin()
+      dispatch(addToChain({ letter, index }))
+    } else if (isChained) {
+      const previousIndex = last(this.props.currentWord).index
+
+      this['tile' + previousIndex].unspin()
+      dispatch(removeFromChain(previousIndex))
+    }
+  }
+
+  handleRelease = () => {
+    this.setState({ activeTile: null })
+
+    if (this.props.currentWordIsValid) {
+      this.props.dispatch({ type: 'SCORE_WORD_START' })
+
+      return
+    }
+
+    if (this.props.currentWord.length) {
+      this.props.dispatch(removeFromChain(this.props.currentWord[0].index))
+    }
   }
 }
 
