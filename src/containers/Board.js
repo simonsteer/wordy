@@ -152,10 +152,11 @@ export default class Board extends React.Component {
       this['tile' + index].spin()
       dispatch(addToChain({ letter, index }))
     } else if (isChained) {
-      const previousIndex = last(this.props.currentWord).index
+      const i = this.props.currentWord.findIndex(l => l.index === index) + 1
+      const indexToUnchainFrom = this.props.currentWord[i].index
 
-      this['tile' + previousIndex].unspin()
-      dispatch(removeFromChain(previousIndex))
+      this['tile' + indexToUnchainFrom].unspin()
+      dispatch(removeFromChain(indexToUnchainFrom))
     }
   }
 

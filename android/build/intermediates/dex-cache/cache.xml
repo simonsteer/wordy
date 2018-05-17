@@ -3,24 +3,6 @@
 
     <item
         is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_ab02fe6a6ac9e15030412c6138b99438806e085f.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_6cffad65ab09e4572cdd621a080428e8d2881bae.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-okhttp3/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
@@ -36,6 +18,69 @@
         revision="23.0.1"
         sha1="48c7f54c2515a2312d3a4481d10c43fbb807f3af">
         <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-1.3.0_38144262c974e32453988a6a0928cbc991c256a1.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/jars/libs/infer-annotations-4.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_cc33000e3800614261adedd714be86c43ea94aae.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_504411a7e3682f804d2cfb2a2778c1052dd53800.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_b477fe049721a7c7fac807e1d9570c297f0bf5ab.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_aa3f570c8d7451465ca1dadf0d862520ae55db3b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="01f201f8a16c7438c9ee4c56139d01663f2cb0e4">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.55.3_d0ec235ab51f4383229d3aa87b140ea5e8f64ba9.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/classes.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="c31e21b53ff2f74664e498248d01453a32e32d48">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.android.support-support-v4-23.0.1_ab02fe6a6ac9e15030412c6138b99438806e085f.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/support-v4/23.0.1/jars/libs/internal_impl-23.0.1.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="23.0.1"
+        sha1="aa92916125166649d8ad4ba3940c3dd7515596d3">
+        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/internal_impl-23.0.1_6cffad65ab09e4572cdd621a080428e8d2881bae.jar" />
     </item>
     <item
         is-multidex="false"
@@ -93,30 +138,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.0.1/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="d86429b0f0b3f3cafbeb78dda1b9d89119ccb05d">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.android.support-appcompat-v7-23.0.1_504411a7e3682f804d2cfb2a2778c1052dd53800.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.fresco/imagepipeline-base/1.3.0/jars/classes.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="72128af126ddd7d6252da9357fe560d3abcdfb0c">
         <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-imagepipeline-base-1.3.0_61e717de0dc299f153653269cdb7609bb3f220a6.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.fresco/drawee/1.3.0/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="c65a2e39d54023bac3aef64a2f0cff89289c7ff6">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.fresco-drawee-1.3.0_b477fe049721a7c7fac807e1d9570c297f0bf5ab.jar" />
     </item>
     <item
         is-multidex="false"
@@ -138,15 +165,6 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/jars/libs/infer-annotations-4.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9809e90be788acdb479b2b44e2112f3295a03068">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/infer-annotations-4.0_73c70054a529748f338c33966c2dc6401180bb59.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/simon/.gradle/caches/modules-2/files-2.1/com.google.code.findbugs/jsr305/3.0.0/5871fb60dc68d67da54a663c3fd636a10a532948/jsr305-3.0.0.jar"
         jumboMode="false"
         optimize="true"
@@ -156,30 +174,12 @@
     </item>
     <item
         is-multidex="false"
-        jar="/Users/simon/.gradle/caches/modules-2/files-2.1/com.squareup.okio/okio/1.13.0/a9283170b7305c8d92d25aff02a6ab7e45d06cbe/okio-1.13.0.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="a9283170b7305c8d92d25aff02a6ab7e45d06cbe">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/okio-1.13.0_aa3f570c8d7451465ca1dadf0d862520ae55db3b.jar" />
-    </item>
-    <item
-        is-multidex="false"
         jar="/Users/simon/.gradle/caches/modules-2/files-2.1/com.parse.bolts/bolts-tasks/1.4.0/d85884acf6810a3bbbecb587f239005cbc846dc4/bolts-tasks-1.4.0.jar"
         jumboMode="false"
         optimize="true"
         revision="23.0.1"
         sha1="d85884acf6810a3bbbecb587f239005cbc846dc4">
         <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/bolts-tasks-1.4.0_7d462c2a5446f724250f87b82fcb5c5e1a2f3840.jar" />
-    </item>
-    <item
-        is-multidex="false"
-        jar="/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/jars/classes.jar"
-        jumboMode="false"
-        optimize="true"
-        revision="23.0.1"
-        sha1="9236445249b688377917bbf182bb651ba5a9c5f1">
-        <dex dex="/Users/simon/code/wordy/android/app/build/intermediates/pre-dexed/debug/com.facebook.react-react-native-0.54.4_b1d53000b07265bc23576fcc60c52b30433c6d07.jar" />
     </item>
     <item
         is-multidex="false"

@@ -9,7 +9,7 @@
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/dev_loading_view.xml",
-        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/res/layout/dev_loading_view.xml"
+        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/dev_loading_view.xml"
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/select_dialog_item_material.xml",
@@ -57,7 +57,7 @@
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/redbox_view.xml",
-        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/res/layout/redbox_view.xml"
+        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_view.xml"
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/select_dialog_singlechoice_material.xml",
@@ -101,7 +101,7 @@
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/redbox_item_frame.xml",
-        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/res/layout/redbox_item_frame.xml"
+        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_item_frame.xml"
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/abc_screen_simple_overlay_action_mode.xml",
@@ -129,7 +129,7 @@
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/fps_view.xml",
-        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/res/layout/fps_view.xml"
+        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/fps_view.xml"
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
@@ -157,7 +157,7 @@
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/redbox_item_title.xml",
-        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.54.4/res/layout/redbox_item_title.xml"
+        "source": "/Users/simon/code/wordy/android/app/build/intermediates/exploded-aar/com.facebook.react/react-native/0.55.3/res/layout/redbox_item_title.xml"
     },
     {
         "merged": "/Users/simon/code/wordy/android/app/build/intermediates/res/merged/debug/layout/abc_activity_chooser_view.xml",
