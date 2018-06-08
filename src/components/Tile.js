@@ -7,6 +7,8 @@ import {
   Easing,
   TouchableWithoutFeedback,
 } from 'react-native'
+import LinearGradient from 'react-native-linear-gradient'
+
 import customStyles from '../utils/customStyles'
 import addToChain from '../actions/addToChain'
 import removeFromChain from '../actions/removeFromChain'
@@ -75,20 +77,27 @@ export default class Tile extends React.Component {
           },
         ]}
       >
-        <View style={styles.tile}>
-          <Animated.View
-            style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]}
-          />
-          <Text style={styles.letter}>
-            {this.state.scramble ? this.state.scramble : letter}
-          </Text>
+        <LinearGradient
+          colors={['rgb(255,235,0)', 'rgb(233,180,47)']}
+          start={{ x: 0, y: 0.3 }}
+          end={{ x: 0.3, y: 1 }}
+          style={{ width: '95%', height: '95%', borderRadius: 3 }}
+        >
+          <View style={styles.tile}>
+            <Animated.View
+              style={[styles.bubble, { transform: [{ scale: bubbleScale }] }]}
+            />
+            <Text style={styles.letter}>
+              {this.state.scramble ? this.state.scramble : letter}
+            </Text>
 
-          <Text style={styles.points}>
-            {this.state.scramble
-              ? letters[this.state.scramble].points
-              : letters[letter].points}
-          </Text>
-        </View>
+            <Text style={styles.points}>
+              {this.state.scramble
+                ? letters[this.state.scramble].points
+                : letters[letter].points}
+            </Text>
+          </View>
+        </LinearGradient>
       </Animated.View>
     )
   }
@@ -150,10 +159,7 @@ const styles = StyleSheet.create({
     height: '100%',
     width: '100%',
     borderRadius: 5,
-    borderBottomWidth: 3,
-    borderRightWidth: 3,
-    backgroundColor: 'rgb(255,215,0)',
-    borderColor: 'rgb(218,165,32)',
+    backgroundColor: 'rgb(200,125,12)',
   },
   tile: {
     justifyContent: 'center',

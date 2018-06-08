@@ -1,3 +1,3 @@
 #!/bin/sh
-export NODE_BINARY=node
-../node_modules/react-native/scripts/react-native-xcode.sh
+export NODE_BINARY='node --max_old_space_size=8192'
+../node_modules/react-native/packager/react-native-xcode.sh

@@ -67,10 +67,9 @@ export default class Board extends React.Component {
               false
             )
 
-            const canChain = !i
-              ? !scoringInProgress && true
-              : !scoringInProgress &&
-                (currentWord.length === 0 ||
+            const canChain =
+              i !== false && !scoringInProgress
+                ? currentWord.length === 0 ||
                   (!isChained &&
                     ((i + 1 === index && index % 5 !== 0) ||
                       (i - 1 === index && index % 5 !== 4) ||
@@ -79,7 +78,8 @@ export default class Board extends React.Component {
                       (i + 4 === index && index % 5 !== 4) ||
                       (i - 4 === index && index % 5 !== 0) ||
                       i + 5 === index ||
-                      i - 5 === index)))
+                      i - 5 === index))
+                : true
 
             return (
               <View

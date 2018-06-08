@@ -28,6 +28,7 @@
     "react": "16.3.0",
     "react-icons-kit": "^1.1.4",
     "react-native": "~0.54.1",
+    "react-native-linear-gradient": "^5.6.0",
     "react-redux": "^5.0.7",
     "redux": "^4.0.0",
     "timer.js": "^1.0.4",
